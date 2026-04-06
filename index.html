@@ -8,6 +8,47 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
+
+.nome-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.nome {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.decor {
+  font-size: 20px;
+  opacity: 0.8;
+}
+
+.idade-box {
+  display: flex;
+  flex-direction: column; /* 👈 ESSA LINHA FAZ A MÁGICA */
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.numero {
+  font-size: 100px;
+  font-weight: 700;
+  background: linear-gradient(45deg, #69f0ff, #00c853);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.aninho {
+  font-size: 22px;
+  margin-top: -10px; /* aproxima do número */
+  opacity: 0.9;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -15,10 +56,14 @@
   font-family: 'Poppins', sans-serif;
 }
 
+
+
 body {
+  
   overflow: hidden;
   color: white;
 }
+
 
 /* VIDEO FUNDO */
 #bg-video {
@@ -72,6 +117,9 @@ body {
 }
 
 /* TEXTOS */
+
+
+
 h1 {
   font-weight: 600;
   margin-bottom: 10px;
@@ -146,10 +194,17 @@ h1 {
 .fade {
   animation: fadeUp 1s ease;
 }
+
+
+
 </style>
 </head>
 
 <body>
+
+<audio id="musica" loop>
+  <source src="mscmar.mp3" type="audio/mpeg">
+</audio>
 
 <!-- VIDEO -->
 <video autoplay muted loop playsinline id="bg-video">
@@ -162,16 +217,24 @@ h1 {
 <div class="screen active">
   <div class="card">
     <h1>Você recebeu um convite 🎉</h1>
-    <button class="btn primary" onclick="next(2)">Abrir convite</button>
+    <button class="btn primary" onclick="iniciarConvite()">Abrir convite</button>
   </div>
 </div>
 
 <!-- TELA 2 -->
 <div class="screen">
   <div class="card">
-    <h1 class="nome">Levi</h1>
-    <div class="numero">1</div>
-    <div class="sub">aninho</div>
+<div class="nome-box">
+  <span class="decor">🌊</span>
+  <h1 class="nome">Levi</h1>
+  <span class="decor">🌊</span>
+</div>
+
+<div class="idade-box">
+  <span class="numero">1</span>
+  <br>
+  <span class="aninho">aninho</span>
+</div>
     <button class="btn primary" onclick="next(3)">Continuar</button>
   </div>
 </div>
@@ -188,7 +251,7 @@ h1 {
 <div class="screen">
   <div class="card">
     <div class="info">📅 19 de dezembro</div>
-    <div class="info">⏰ 14h</div>
+    <div class="info">⏰ 14h00</div>
     <div class="info">📍 Irashai</div>
 
     <button class="btn primary" onclick="confirmar()">Confirmar presença</button>
@@ -205,14 +268,21 @@ function next(tela) {
 function confirmar() {
   let nome = prompt("Digite seu nome:");
   if(nome){
-    let msg = "Olá, confirmo presença no aniversário do Levi. Nome: " + nome;
-    window.open("https://wa.me/5599999999999?text=" + encodeURIComponent(msg));
+    let msg = "_Oiiii Amanda! Eu quero *confirmar* minha presença no *aniversário do Levi!*._ Nome: " + nome;
+    window.open("https://wa.me/5544999639628?text=" + encodeURIComponent(msg));
   }
 }
 
 function abrirMapa() {
   window.open("https://maps.google.com");
 }
+
+function iniciarConvite() {
+  let musica = document.getElementById("musica");
+  musica.play().catch(() => {});
+  next(2);
+}
+
 </script>
 
 </body>
