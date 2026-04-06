@@ -195,7 +195,11 @@ h1 {
   animation: fadeUp 1s ease;
 }
 
-
+.contador {
+  margin-top: 15px;
+  font-size: 16px;
+  opacity: 0.9;
+}
 
 </style>
 </head>
@@ -213,7 +217,7 @@ h1 {
 
 <div class="overlay"></div>
 
-<!-- TELA 1 -->
+<!-- TELA 1 CONVITE -->
 <div class="screen active">
   <div class="card">
     <h1>Você recebeu um convite 🎉</h1>
@@ -221,7 +225,7 @@ h1 {
   </div>
 </div>
 
-<!-- TELA 2 -->
+<!-- TELA 2 LEVI 1 ANINHO -->
 <div class="screen">
   <div class="card">
 <div class="nome-box">
@@ -239,10 +243,12 @@ h1 {
   </div>
 </div>
 
-<!-- TELA 3 -->
+<!-- TELA 3 VENHA PARTICIPAR DESSA AVENTURA-->
 <div class="screen">
   <div class="card">
     <h1>Venha participar dessa aventura 🌊</h1>
+
+<p id="contador" class="contador"></p>
     <button class="btn primary" onclick="next(4)">Ver detalhes</button>
   </div>
 </div>
@@ -250,9 +256,10 @@ h1 {
 <!-- TELA 4 -->
 <div class="screen">
   <div class="card">
-    <div class="info">📅 19 de dezembro</div>
-    <div class="info">⏰ 14h00</div>
-    <div class="info">📍 Irashai</div>
+    <div class="info">📅 19 de dezembro 📅</div>
+    <div class="info">⏰ 14h00 ⏰</div>
+    <div class="info">📍 Irashai 📍</div>
+    <div class="info">Conto com a sua presença!</div>
 
     <button class="btn primary" onclick="confirmar()">Confirmar presença</button>
     <button class="btn secondary" onclick="abrirMapa()">Ver localização</button>
@@ -268,13 +275,13 @@ function next(tela) {
 function confirmar() {
   let nome = prompt("Digite seu nome:");
   if(nome){
-    let msg = "_Oiiii Amanda! Eu quero *confirmar* minha presença no *aniversário do Levi!*._ Nome: " + nome;
+    let msg = "_Oiiii Amanda! Eu quero *confirmar* minha presença no *aniversário do Levi!*._: " + nome;
     window.open("https://wa.me/5544999639628?text=" + encodeURIComponent(msg));
   }
 }
 
 function abrirMapa() {
-  window.open("https://maps.google.com");
+  window.open("https://maps.app.goo.gl/nZvVcdajkrjYLt979");
 }
 
 function iniciarConvite() {
@@ -282,6 +289,28 @@ function iniciarConvite() {
   musica.play().catch(() => {});
   next(2);
 }
+function atualizarContador() {
+  const dataEvento = new Date("2026-12-19T14:00:00"); // DATA DO EVENTO
+  const agora = new Date();
+
+  const diff = dataEvento - agora;
+
+  if (diff <= 0) {
+    document.getElementById("contador").innerText = "🎉 É hoje!";
+    return;
+  }
+
+  const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const meses = Math.floor(dias / 30);
+  const diasRestantes = dias % 30;
+
+  document.getElementById("contador").innerText =
+    `Faltam ${meses} meses e ${diasRestantes} dias para o aniversário 🎂`;
+}
+
+// atualiza automaticamente
+setInterval(atualizarContador, 1000);
+atualizarContador();
 
 </script>
 
